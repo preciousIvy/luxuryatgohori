@@ -3,670 +3,901 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gohori Resort — Mutoko</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>Gohori Resort – Mutoko, Zimbabwe</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #1a2a5e;
-    --red: #c0392b;
-    --gold: #d4a017;
-    --white: #ffffff;
-    --cream: #faf8f4;
-    --dark: #111827;
-    --gray: #6b7280;
-    --light-gray: #f3f4f6;
-  }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1a2a4a;
+  --red:#c0392b;
+  --gold:#dd1f0a;
+  --white:#fff;
+  --cream:#faf7f2;
+  --gray:#f0ede8;
+  --text:#2a2a2a;
+  --mid:#555;
+  --light:#888;
+  --sh:0 4px 24px rgba(0,0,0,.11);
+  --shx:0 12px 48px rgba(0,0,0,.18);
+  --tr:.3s ease;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Lato',sans-serif;color:var(--text);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+img{display:block;width:100%;height:100%;object-fit:cover}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Poppins', sans-serif; color: var(--dark); background: var(--white); overflow-x: hidden; }
-  h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+.page{display:none}
+.page.active{display:block}
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 60px; height: 80px;
-    background: rgba(26, 42, 94, 0.97);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    transition: all 0.3s;
-  }
-  nav.scrolled { height: 64px; background: rgba(26, 42, 94, 1); box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
-  .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-  .nav-logo img { height: 58px; width: 88px; object-fit: contain; border-radius: 6px; }
-  .nav-logo-text { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--white); letter-spacing: 2px; }
-  .nav-logo-text span { color: var(--gold); }
-  .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
-  .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; position: relative; }
-  .nav-links a::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 1px; background: var(--gold); transform: scaleX(0); transition: transform 0.3s; }
-  .nav-links a:hover { color: var(--white); }
-  .nav-links a:hover::after { transform: scaleX(1); }
-  .nav-cta { background: var(--red); color: var(--white) !important; padding: 10px 24px; border-radius: 2px; font-weight: 600 !important; letter-spacing: 1px !important; }
-  .nav-cta::after { display: none !important; }
-  .nav-cta:hover { background: #a93226 !important; }
-  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-  .nav-hamburger span { width: 24px; height: 2px; background: white; display: block; transition: all 0.3s; }
+.topbar{background:var(--white);border-bottom:1px solid #eee;padding:8px 32px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#555;}
+.topbar strong{color:var(--navy)}
+.soc a{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#eee;color:#444;font-size:12px;margin-left:5px;transition:background .2s,color .2s;}
+.soc a:hover{background:var(--navy);color:#fff}
 
-  /* HERO */
-  .hero { height: 100vh; min-height: 700px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-  .hero-bg { position: absolute; inset: 0; background-size: cover; background-position: center; filter: brightness(0.45); transform: scale(1.05); animation: heroZoom 20s ease-in-out infinite alternate; }
-  @keyframes heroZoom { from { transform: scale(1.05); } to { transform: scale(1.12); } }
-  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(26,42,94,0.7) 0%, rgba(192,57,43,0.25) 60%, transparent 100%); }
-  .hero-content { position: relative; z-index: 2; text-align: center; color: var(--white); padding: 0 24px; animation: fadeUp 1.2s ease both; }
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-  .hero-badge { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); padding: 6px 20px; border-radius: 1px; margin-bottom: 28px; animation: fadeUp 1.2s 0.2s ease both; }
-  .hero h1 { font-size: clamp(52px, 9vw, 100px); font-weight: 900; line-height: 0.95; letter-spacing: -1px; margin-bottom: 24px; animation: fadeUp 1.2s 0.4s ease both; }
-  .hero h1 span { color: var(--gold); font-style: italic; }
-  .hero-sub { font-size: clamp(14px, 2vw, 18px); font-weight: 300; letter-spacing: 2px; color: rgba(255,255,255,0.85); margin-bottom: 48px; animation: fadeUp 1.2s 0.6s ease both; }
-  .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; animation: fadeUp 1.2s 0.8s ease both; }
-  .btn-primary { background: var(--red); color: white; padding: 16px 40px; text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; border-radius: 2px; transition: all 0.3s; display: inline-block; }
-  .btn-primary:hover { background: #a93226; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(192,57,43,0.4); }
-  .btn-outline { background: transparent; color: white; padding: 16px 40px; text-decoration: none; font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.6); border-radius: 2px; transition: all 0.3s; display: inline-block; }
-  .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: white; }
-  .hero-scroll { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,0.5); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; animation: bounce 2s infinite; }
-  @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
-  .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent); }
+nav{background:var(--white);padding:0 32px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 10px rgba(0,0,0,.08);position:sticky;top:0;z-index:1000;height:70px;}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo img{width:52px;height:52px}
+.brand{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold);letter-spacing:3px;line-height:1}
+.sub{font-size:9px;letter-spacing:5px;color:var(--light);text-transform:uppercase;margin-top:2px}
+.navlist{display:flex;list-style:none;align-items:center}
+.navlist a{display:block;padding:0 12px;font-size:11.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);line-height:70px;transition:color .2s;white-space:nowrap;cursor:pointer;}
+.navlist a:hover,.navlist a.on{color:var(--navy)}
+.navlist a.on{border-bottom:2px solid var(--gold)}
+.sep{color:#ccc;line-height:70px;padding:0 2px;font-size:11px}
+.hasdrop>a::after{content:' ▾';font-size:9px}
+.drop{display:none;position:absolute;top:70px;left:0;background:var(--white);box-shadow:var(--shx);min-width:170px;z-index:200;border-top:2px solid var(--gold);}
+.hasdrop{position:relative}
+.hasdrop:hover .drop{display:block}
+.drop a{line-height:1;padding:12px 16px;font-size:12px;border-bottom:1px solid #f0f0f0;color:var(--mid);display:block}
+.drop a:hover{background:var(--cream);color:var(--navy)}
+.navbtn{background:var(--gold)!important;color:#fff!important;line-height:1!important;padding:11px 18px!important;border-radius:2px;margin-left:8px}
+.navbtn:hover{background:var(--navy)!important}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.burger span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px;transition:var(--tr)}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-  /* SECTIONS */
-  section { padding: 100px 0; }
-  .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-  .section-label { font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--red); display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-  .section-label::before { content: ''; display: block; width: 32px; height: 1px; background: var(--red); }
-  .section-title { font-size: clamp(36px, 5vw, 58px); font-weight: 700; line-height: 1.1; color: var(--navy); margin-bottom: 20px; }
-  .section-title em { color: var(--red); font-style: italic; }
-  .section-desc { font-size: 16px; line-height: 1.8; color: var(--gray); max-width: 580px; }
-  .red-line { width: 60px; height: 3px; background: var(--red); margin: 24px 0; }
+.hero{position:relative;height:480px;overflow:hidden}
+.slides{display:flex;height:100%;transition:transform .7s cubic-bezier(.4,0,.2,1)}
+.slide{min-width:100%;height:100%;position:relative}
+.slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slide-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.15) 0%,rgba(0,0,0,.6) 100%);z-index:1}
+.slide-text{position:absolute;bottom:90px;left:10%;z-index:2;color:#fff;max-width:560px;}
+.eyebrow-sm{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px}
+.slide-text h1{font-family:'Playfair Display',serif;font-size:48px;line-height:1.15;font-weight:700;text-shadow:0 2px 16px rgba(0,0,0,.4);margin-bottom:18px}
+.slide-text p{font-size:15px;line-height:1.7;opacity:.88;margin-bottom:26px}
+.sbtn{display:inline-block;background:var(--gold);color:#fff;padding:13px 32px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:background var(--tr),transform var(--tr);}
+.sbtn:hover{background:var(--white);color:var(--navy);transform:translateY(-2px)}
+.sbtn2{display:inline-block;border:2px solid rgba(255,255,255,.7);color:#fff;padding:11px 28px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border-radius:2px;margin-left:12px;cursor:pointer;transition:background var(--tr);}
+.sbtn2:hover{background:rgba(255,255,255,.18)}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.55);color:#fff;font-size:22px;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:10;transition:background .2s;backdrop-filter:blur(4px);cursor:pointer;}
+.arrow:hover{background:rgba(255,255,255,.35)}
+.arrow.prev{left:20px}
+.arrow.next{right:20px}
+.dots{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10}
+.dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.45);border:none;cursor:pointer;transition:all .2s}
+.dot.on{background:var(--gold);width:24px;border-radius:5px}
 
-  /* ABOUT */
-  .about { background: var(--cream); }
-  .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-  .about-images { position: relative; height: 520px; }
-  .about-img-main { position: absolute; top: 0; left: 0; width: 75%; height: 85%; object-fit: cover; border-radius: 2px; box-shadow: 0 24px 60px rgba(0,0,0,0.2); }
-  .about-img-accent { position: absolute; bottom: 0; right: 0; width: 55%; height: 55%; object-fit: cover; border-radius: 2px; border: 4px solid white; box-shadow: 0 16px 40px rgba(0,0,0,0.18); }
-  .about-badge { position: absolute; top: 50%; left: 60%; transform: translate(-50%, -50%); background: var(--navy); color: white; padding: 20px 24px; text-align: center; border-radius: 2px; z-index: 3; box-shadow: 0 8px 24px rgba(26,42,94,0.4); }
-  .about-badge-num { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 900; color: var(--gold); display: block; line-height: 1; }
-  .about-badge-text { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
-  .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
-  .stat-card { background: white; padding: 24px; border-left: 3px solid var(--red); border-radius: 0 2px 2px 0; }
-  .stat-num { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: var(--navy); line-height: 1; }
-  .stat-label { font-size: 13px; color: var(--gray); margin-top: 4px; }
+.grid-sec{display:grid;grid-template-rows:auto auto}
+.grow1{display:grid;grid-template-columns:1fr 1fr;height:250px}
+.grow2{display:grid;grid-template-columns:1fr 1fr 1fr;height:270px}
+.gimg{overflow:hidden;position:relative;cursor:pointer}
+.gimg::before{content:'';position:absolute;inset:0;opacity:0;background:rgba(26,42,74,.3);z-index:1;transition:opacity .3s}
+.gimg:hover::before{opacity:1}
+.gimg img{transition:transform .5s;margin:5px;}
+.gimg:hover img{transform:scale(1.05)}
 
-  /* AMENITIES */
-  .amenities { background: var(--navy); }
-  .amenities .section-title { color: var(--white); }
-  .amenities .section-label { color: var(--gold); }
-  .amenities .section-label::before { background: var(--gold); }
-  .amenities .section-desc { color: rgba(255,255,255,0.6); }
-  .amenity-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 60px; }
-  .amenity-card { position: relative; overflow: hidden; cursor: pointer; aspect-ratio: 4/3; }
-  .amenity-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; filter: brightness(0.6); }
-  .amenity-card:hover img { transform: scale(1.08); filter: brightness(0.4); }
-  .amenity-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 32px; background: linear-gradient(to top, rgba(26,42,94,0.9) 0%, transparent 50%); transition: background 0.4s; }
-  .amenity-card:hover .amenity-overlay { background: linear-gradient(to top, rgba(192,57,43,0.85) 0%, rgba(26,42,94,0.5) 100%); }
-  .amenity-title { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: white; margin-bottom: 8px; }
-  .amenity-desc { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.6; opacity: 0; transform: translateY(8px); transition: all 0.4s; }
-  .amenity-card:hover .amenity-desc { opacity: 1; transform: translateY(0); }
+.sec{padding:76px 48px}
+.sec-cream{background:var(--cream)}
+.sec-gray{background:var(--gray)}
+.sec-navy{background:var(--navy)}
+.sec-white{background:var(--white)}
+.sh{text-align:center;margin-bottom:52px}
+.sh .ey{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px}
+.sh h2{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;color:var(--navy);margin-bottom:14px}
+.sec-navy .sh h2{color:#fff}
+.sh p{font-size:14px;color:var(--mid);max-width:540px;margin:0 auto;line-height:1.8}
+.div{width:55px;height:2px;background:var(--gold);margin:14px auto 0;border-radius:2px}
 
-  /* DINING */
-  .dining { background: var(--white); }
-  .dining-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-  .dining-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .dining-gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 2px; transition: transform 0.4s, filter 0.4s; }
-  .dining-gallery img:hover { transform: scale(1.03); filter: brightness(1.1); }
-  .dining-gallery img:first-child { grid-column: 1 / -1; aspect-ratio: 16/9; }
-  .dining-features { list-style: none; margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
-  .dining-features li { display: flex; align-items: flex-start; gap: 14px; font-size: 15px; color: var(--gray); line-height: 1.6; }
-  .dining-features li::before { content: '✦'; color: var(--gold); font-size: 10px; margin-top: 5px; flex-shrink: 0; }
+.btn{display:inline-block;background:var(--navy);color:#fff;padding:13px 32px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:background var(--tr)}
+.btn:hover{background:var(--gold)}
+.btn-g{display:inline-block;background:var(--gold);color:#fff;padding:13px 32px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:background var(--tr)}
+.btn-g:hover{background:var(--navy)}
+.btn-o{display:inline-block;border:2px solid var(--navy);color:var(--navy);padding:11px 28px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:all var(--tr)}
+.btn-o:hover{background:var(--navy);color:#fff}
 
-  /* SPA */
-  .spa { background: var(--cream); }
-  .spa-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-  .spa-text { order: 2; }
-  .spa-images { order: 1; }
-  .spa-images-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .spa-images-grid img { width: 100%; object-fit: cover; border-radius: 2px; transition: transform 0.4s; }
-  .spa-images-grid img:hover { transform: scale(1.03); }
-  .spa-images-grid img:first-child { grid-column: 1 / -1; aspect-ratio: 16/9; }
-  .spa-images-grid img:not(:first-child) { aspect-ratio: 1; }
-  .spa-treatments { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
-  .treatment { background: white; padding: 20px; border-radius: 2px; border-top: 2px solid var(--gold); }
-  .treatment-name { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
-  .treatment-desc { font-size: 12px; color: var(--gray); line-height: 1.6; }
+.phero{height:290px;position:relative;overflow:hidden;display:flex;align-items:flex-end}
+.phero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.phero-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,20,40,.2),rgba(10,20,40,.72))}
+.phero-txt{position:relative;z-index:2;padding:0 52px 36px;color:#fff}
+.phero-txt .ey{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px}
+.phero-txt h1{font-family:'Playfair Display',serif;font-size:40px;font-weight:700}
+.bc{font-size:11px;color:rgba(255,255,255,.5);margin-top:6px}
+.bc span{color:rgba(255,255,255,.75);cursor:pointer}
+.bc span:hover{color:var(--gold);text-decoration:underline}
 
-  /* GALLERY */
-  .gallery { background: var(--dark); }
-  .gallery .section-title { color: white; }
-  .gallery .section-label { color: var(--gold); }
-  .gallery .section-label::before { background: var(--gold); }
-  .gallery-header { text-align: center; margin-bottom: 48px; }
-  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
-  .gallery-item { overflow: hidden; position: relative; }
-  .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; min-height: 220px; }
-  .gallery-item:hover img { transform: scale(1.06); }
-  .gallery-item.wide { grid-column: span 2; }
-  .gallery-item.tall { grid-row: span 2; }
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.card{background:var(--white);border-radius:3px;box-shadow:var(--sh);overflow:hidden;transition:transform var(--tr),box-shadow var(--tr)}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shx)}
+.cimg{height:215px;overflow:hidden;position:relative}
+.cimg img{transition:transform .5px}
+.card:hover .cimg img{transform:scale(1.06)}
+.badge{position:absolute;top:14px;right:14px;background:var(--gold);color:#fff;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 10px;border-radius:2px;z-index:2}
+.cbody{padding:22px 24px 26px}
+.cbody h3{font-family:'Playfair Display',serif;font-size:20px;color:var(--navy);margin-bottom:8px}
+.cbody p{font-size:13px;color:var(--mid);line-height:1.7;margin-bottom:14px}
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+.tag{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--light);background:var(--gray);padding:4px 10px;border-radius:20px}
+.cftr{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px solid #eee}
+.from{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--light)}
+.amt{font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);font-weight:700}
+.per{font-size:11px;color:var(--light)}
+.bsm{background:var(--navy);color:#fff;padding:9px 18px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border-radius:2px;transition:background var(--tr)}
+.bsm:hover{background:var(--gold)}
 
-  /* CONTACT */
-  .contact { background: var(--navy); }
-  .contact .section-title { color: white; }
-  .contact .section-label { color: var(--gold); }
-  .contact .section-label::before { background: var(--gold); }
-  .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
-  .contact-info { color: rgba(255,255,255,0.8); }
-  .contact-info p { font-size: 16px; line-height: 1.8; margin-bottom: 40px; }
-  .contact-details { display: flex; flex-direction: column; gap: 24px; }
-  .contact-detail { display: flex; gap: 16px; align-items: flex-start; }
-  .contact-icon { width: 44px; height: 44px; flex-shrink: 0; background: rgba(255,255,255,0.1); border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 18px; border: 1px solid rgba(255,255,255,0.15); }
-  .contact-detail-text h4 { font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
-  .contact-detail-text p, .contact-detail-text a { font-size: 15px; color: rgba(255,255,255,0.8); text-decoration: none; line-height: 1.5; }
-  .contact-detail-text a:hover { color: white; }
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.acard{position:relative;overflow:hidden;border-radius:3px;height:290px;cursor:pointer}
+.acard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.acard:hover img{transform:scale(1.06)}
+.aov{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,20,40,.88) 0%,rgba(10,20,40,.1) 60%);z-index:1;transition:var(--tr)}
+.acard:hover .aov{background:linear-gradient(to top,rgba(10,20,40,.94) 0%,rgba(10,20,40,.28) 100%)}
+.atxt{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:22px 20px;color:#fff}
+.atxt .ic{font-size:24px;margin-bottom:8px}
+.atxt h3{font-family:'Playfair Display',serif;font-size:18px;margin-bottom:6px}
+.atxt p{font-size:12px;line-height:1.6;opacity:0;max-height:0;overflow:hidden;transition:opacity .3s,max-height .3s}
+.acard:hover .atxt p{opacity:.85;max-height:60px}
 
-  /* CONTACT FORM */
-  .contact-form {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 4px;
-    padding: 40px;
-  }
-  .contact-form h3 { font-size: 24px; color: white; margin-bottom: 28px; }
-  .form-group { margin-bottom: 20px; }
-  .form-group label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px; }
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    width: 100%;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    color: white;
-    padding: 14px 16px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
-    border-radius: 2px;
-    outline: none;
-    transition: border-color 0.3s;
-  }
-  .form-group input::placeholder,
-  .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus { border-color: var(--gold); }
-  .form-group select option { background: var(--navy); }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .form-group textarea { min-height: 100px; resize: vertical; }
-  .btn-submit {
-    width: 100%;
-    background: var(--red);
-    color: white;
-    border: none;
-    padding: 16px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 13px; font-weight: 600;
-    letter-spacing: 2px; text-transform: uppercase;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin-top: 8px;
-  }
-  .btn-submit:hover { background: #a93226; transform: translateY(-1px); }
+.galg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.gth{height:230px;overflow:hidden;position:relative;cursor:pointer;border-radius:2px}
+.gth img{transition:transform .5s}
+.gth:hover img{transform:scale(1.07)}
+.gth::after{content:'⊕';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:30px;color:rgba(255,255,255,0);background:rgba(26,42,74,0);transition:all .3s;z-index:1}
+.gth:hover::after{color:rgba(255,255,255,.85);background:rgba(26,42,74,.28)}
 
-  /* FOOTER */
-  footer { background: #0d1a3a; color: rgba(255,255,255,0.5); text-align: center; padding: 40px; font-size: 13px; }
-  footer .footer-logo { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: white; letter-spacing: 3px; margin-bottom: 8px; }
-  footer .footer-logo span { color: var(--gold); font-style: italic; }
-  footer .footer-tagline { margin-bottom: 32px; }
-  footer .footer-links { display: flex; gap: 32px; justify-content: center; list-style: none; margin-bottom: 32px; flex-wrap: wrap; }
-  footer .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; }
-  footer .footer-links a:hover { color: var(--gold); }
-  footer .divider { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 24px; }
+.lb{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.94);align-items:center;justify-content:center}
+.lb.on{display:flex}
+.lbi{max-width:860px;width:90%;position:relative}
+.lbi img{width:100%;height:520px;object-fit:cover;border-radius:3px}
+.lbc{position:absolute;top:-42px;right:0;color:#fff;font-size:26px;background:none;border:none;cursor:pointer;opacity:.7}
+.lbc:hover{opacity:1}
+.lbn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.5);color:#fff;font-size:20px;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
+.lbn:hover{background:rgba(255,255,255,.35)}
+.lbprev{left:-56px}
+.lbnext{right:-56px}
+.lbcap{text-align:center;color:rgba(255,255,255,.6);font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-top:12px}
 
-  /* MOBILE MENU */
-  .mobile-menu { display: none; position: fixed; top: 80px; left: 0; right: 0; background: var(--navy); padding: 24px 32px; z-index: 999; border-top: 1px solid rgba(255,255,255,0.1); }
-  .mobile-menu.open { display: block; }
-  .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 16px; }
-  .mobile-menu a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 15px; font-weight: 500; display: block; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
-  .mobile-menu a:hover { color: var(--gold); }
+.spa2col{display:grid;grid-template-columns:1fr 1fr;min-height:480px}
+.spav{overflow:hidden;position:relative}
+.spav img{width:100%;height:100%;object-fit:cover}
+.spac{padding:58px 54px;display:flex;flex-direction:column;justify-content:center;background:var(--cream)}
+.spac .ey{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px}
+.spac h2{font-family:'Playfair Display',serif;font-size:32px;color:var(--navy);margin-bottom:16px;line-height:1.25}
+.spac p{font-size:14px;color:var(--mid);line-height:1.85;margin-bottom:22px}
+.tlist{list-style:none;margin-bottom:28px}
+.tlist li{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #e0ddd8;font-size:13px}
+.tlist li:last-child{border-bottom:none}
+.tn{color:var(--navy);font-weight:700}
+.td{color:var(--light);font-size:11px;letter-spacing:1px}
+.tp{color:var(--gold);font-weight:700;font-size:14px}
 
-  /* RESPONSIVE */
-  @media (max-width: 1024px) { nav { padding: 0 32px; } .nav-links { gap: 24px; } .amenity-grid { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 768px) {
-    .nav-links { display: none; }
-    .nav-hamburger { display: flex; }
-    .about-inner, .dining-inner, .spa-inner, .contact-inner { grid-template-columns: 1fr; gap: 40px; }
-    .about-images { height: 300px; }
-    .spa-text { order: 1; } .spa-images { order: 2; }
-    .amenity-grid { grid-template-columns: 1fr; }
-    .gallery-grid { grid-template-columns: 1fr 1fr; }
-    .gallery-item.wide { grid-column: span 1; } .gallery-item.tall { grid-row: span 1; }
-    section { padding: 60px 0; } .container { padding: 0 20px; }
-    .form-row { grid-template-columns: 1fr; }
-    .about-stats { grid-template-columns: 1fr 1fr; }
-  }
+.susGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.susc{text-align:center;padding:38px 26px;background:var(--white);border-radius:3px;box-shadow:var(--sh)}
+.susi{font-size:38px;margin-bottom:16px}
+.susc h3{font-family:'Playfair Display',serif;font-size:19px;color:var(--navy);margin-bottom:10px}
+.susc p{font-size:13px;color:var(--mid);line-height:1.75}
 
-  .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-  .fade-in.visible { opacity: 1; transform: translateY(0); }
+.stats{background:var(--navy);display:grid;grid-template-columns:repeat(4,1fr);border-top:3px solid var(--gold)}
+.stat{padding:34px 24px;text-align:center;border-right:1px solid rgba(255,255,255,.08)}
+.stat:last-child{border-right:none}
+.snum{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--gold);line-height:1}
+.slbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:8px}
+
+.testis{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.testi{background:var(--white);padding:32px 28px;border-radius:3px;box-shadow:var(--sh);position:relative}
+.testi::before{content:'"';font-family:'Playfair Display',serif;font-size:72px;color:var(--gold);opacity:.2;position:absolute;top:6px;left:18px;line-height:1}
+.testi p{font-size:13px;line-height:1.8;color:var(--mid);font-style:italic;margin-bottom:18px}
+.tau{display:flex;align-items:center;gap:10px}
+.tav{width:42px;height:42px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:17px;color:var(--gold);flex-shrink:0}
+.tnm{font-weight:700;font-size:13px;color:var(--navy)}
+.tfr{font-size:11px;color:var(--light);letter-spacing:1px}
+.stars{color:var(--gold);font-size:13px;margin-bottom:10px}
+
+.conwrap{display:grid;grid-template-columns:1fr 1.3fr;gap:56px;max-width:1040px;margin:0 auto}
+.coninfo .ey{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:14px}
+.coninfo h2{font-family:'Playfair Display',serif;font-size:30px;color:var(--navy);margin-bottom:18px}
+.coninfo p{font-size:14px;color:var(--mid);line-height:1.8;margin-bottom:26px}
+.cdet{display:flex;gap:14px;align-items:flex-start;margin-bottom:16px}
+.cicn{width:40px;height:40px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;color:var(--gold)}
+.clbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--light);margin-bottom:3px}
+.cval{font-size:14px;color:var(--navy);font-weight:700}
+.cform{background:var(--cream);padding:38px;border-radius:3px;box-shadow:var(--sh)}
+.cform h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:22px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--light);margin-bottom:5px;font-weight:700}
+.fg input,.fg select,.fg textarea{width:100%;padding:11px 14px;border:1px solid #ddd;border-radius:2px;font-family:'Lato',sans-serif;font-size:14px;color:var(--text);background:var(--white);transition:border-color .2s;outline:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--gold)}
+.fg textarea{height:105px;resize:vertical}
+.fsub{width:100%;background:var(--navy);color:#fff;padding:14px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border-radius:2px;transition:background .2s;cursor:pointer;border:none}
+.fsub:hover{background:var(--gold)}
+.fok{display:none;text-align:center;padding:16px;color:#2e7d32;background:#e8f5e9;border-radius:3px;font-weight:700;margin-top:14px;font-size:14px}
+
+footer{background:var(--navy);color:#fff;padding:52px 48px 0}
+.fgrid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:30px;padding-bottom:40px}
+.fcol h3{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;color:#fff}
+.fcol p{font-size:13px;line-height:1.7;color:rgba(255,255,255,.72)}
+.fcol ul{list-style:none}
+.fcol ul li{margin-bottom:8px}
+.fcol ul li a{color:rgba(255,255,255,.72);font-size:13px;transition:color .2s;cursor:pointer}
+.fcol ul li a:hover{color:var(--gold)}
+.fcol address{font-style:normal;font-size:13px;color:rgba(255,255,255,.72);line-height:1.9}
+.fcol address a{color:rgba(255,255,255,.72)}
+.fcol address a:hover{color:var(--gold)}
+.fgal{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.fgth{height:56px;border-radius:2px;overflow:hidden}
+.fgth img{width:100%;height:100%;object-fit:cover}
+.fbot{border-top:1px solid rgba(255,255,255,.14);padding:18px 0;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(255,255,255,.45)}
+.fsoc a{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);font-size:13px;margin-left:6px;transition:background .2s}
+.fsoc a:hover{background:var(--gold);color:#fff}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+.reveal.vis{opacity:1;transform:none}
+
+.toast{position:fixed;bottom:28px;right:28px;z-index:9998;background:var(--navy);color:#fff;padding:13px 22px;border-radius:3px;font-size:13px;box-shadow:var(--shx);transform:translateY(70px);opacity:0;transition:transform .4s,opacity .4s;border-left:4px solid var(--gold);pointer-events:none}
+.toast.on{transform:translateY(0);opacity:1}
+
+.wa{position:fixed;bottom:26px;left:26px;z-index:999;width:52px;height:52px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.4);font-size:24px;color:#fff;transition:transform .2s;text-decoration:none}
+.wa:hover{transform:scale(1.1)}
+
+/* ── POPUP MODAL ── */
+.popup-overlay{
+  display:none;position:fixed;inset:0;z-index:99999;
+  background:rgba(0,0,0,.55);
+  align-items:center;justify-content:center;
+}
+.popup-overlay.on{display:flex;}
+.popup-box{
+  background:#fff;border-radius:6px;
+  padding:48px 40px;max-width:420px;width:90%;
+  text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.25);
+  animation:popIn .35s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+.popup-icon{
+  width:64px;height:64px;border-radius:50%;
+  background:#e8f5e9;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;font-size:30px;
+}
+.popup-box h3{
+  font-family:'Playfair Display',serif;font-size:22px;
+  color:var(--navy);margin-bottom:10px;
+}
+.popup-box p{font-size:14px;color:var(--mid);line-height:1.7;margin-bottom:28px;}
+.popup-close{
+  background:var(--navy);color:#fff;padding:12px 32px;
+  font-size:12px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;border-radius:2px;border:none;
+  cursor:pointer;transition:background .2s;
+}
+.popup-close:hover{background:var(--gold);}
+
+@media(max-width:1024px){
+  .cards{grid-template-columns:1fr 1fr}
+  .fgrid{grid-template-columns:1fr 1fr}
+  .testis{grid-template-columns:1fr}
+}
+@media(max-width:900px){
+  .navlist{display:none;flex-direction:column;position:fixed;top:113px;left:0;right:0;bottom:0;background:var(--white);z-index:999;overflow-y:auto;padding:16px 0}
+  .navlist.open{display:flex}
+  .navlist a{line-height:1;padding:13px 24px}
+  .sep{display:none}
+  .burger{display:flex}
+  nav{padding:0 20px}
+  .topbar{padding:6px 20px}
+  .hero{height:360px}
+  .slide-text h1{font-size:32px}
+  .slide-text{bottom:60px}
+  .grow1{height:190px}
+  .grow2{height:190px}
+  .spa2col{grid-template-columns:1fr}
+  .spav{min-height:280px}
+  .conwrap{grid-template-columns:1fr}
+  .susGrid{grid-template-columns:1fr 1fr}
+  .acts{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .sec{padding:52px 24px}
+  .galg{grid-template-columns:1fr 1fr}
+  .phero-txt{padding:0 24px 28px}
+}
+@media(max-width:600px){
+  .cards{grid-template-columns:1fr}
+  .acts{grid-template-columns:1fr}
+  .susGrid{grid-template-columns:1fr}
+  .frow{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr}
+  .grow1{grid-template-columns:1fr;height:auto}
+  .grow1 .gimg{height:200px}
+  .grow2{grid-template-columns:1fr;height:auto}
+  .grow2 .gimg{height:180px}
+  .galg{grid-template-columns:1fr}
+  .phero-txt h1{font-size:28px}
+  .slide-text h1{font-size:26px}
+  .sbtn2{display:none}
+  .lbprev,.lbnext{display:none}
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="navbar">
-  <a href="#home" class="nav-logo">
-    <img src="logo.jpg" alt="Gohori Resort">
-    <span class="nav-logo-text">GOHORI <span>RESORT</span></span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#amenities">Amenities</a></li>
-    <li><a href="#dining">Dining</a></li>
-    <li><a href="#spa">Spa</a></li>
-    <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#contact" class="nav-cta">Book Now</a></li>
-  </ul>
-  <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
+<!-- TOP BAR -->
+<div class="topbar">
+  <span>Reservation: &nbsp;<strong>+263 78 565 6337</strong></span>
+  <span style="display:flex;align-items:center;gap:4px;">Follow Us:
+    <span class="soc">
+      <a href="#" title="Facebook">f</a>
+      <a href="#" title="Instagram">◎</a>
+      <a href="#" title="Twitter">𝕏</a>
+      <a href="#" title="WhatsApp">✆</a>
+    </span>
+  </span>
+</div>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <div class="logo" onclick="go('home')">
+    <img src="logo.jpg" alt="gohori resort logo">
+    <div><div class="brand">GOHORI</div><div class="sub">RESORT</div></div>
   </div>
+  <button class="burger" id="burger" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <ul class="navlist" id="navlist">
+    <li><span class="sep">|</span></li>
+    <li><a onclick="go('home')" data-p="home" class="on">HOME</a></li>
+    <li><span class="sep">|</span></li>
+    <li><a onclick="go('accommodation')" data-p="accommodation">ACCOMMODATION</a></li>
+    <li><span class="sep">|</span></li>
+    <li><a onclick="go('sustainable')" data-p="sustainable">SUSTAINABLE</a></li>
+    <li><span class="sep">|</span></li>
+    <li class="hasdrop">
+      <a onclick="go('activities')" data-p="activities">ACTIVITIES</a>
+      <ul class="drop">
+        <li><a onclick="go('activities')">Tennis</a></li>
+        <li><a onclick="go('activities')">Horse Riding</a></li>
+        <li><a onclick="go('activities')">Hiking</a></li>
+        <li><a onclick="go('activities')">Spa</a></li>
+        <li><a onclick="go('activities')">Swimming</a></li>
+      </ul>
+    </li>
+    <li><span class="sep">|</span></li>
+    <li><a onclick="go('spa')" data-p="spa">SPA</a></li>
+    <li><span class="sep">|</span></li>
+    <li><a onclick="go('gallery')" data-p="gallery">GALLERY</a></li>
+    <li><span class="sep">|</span></li>
+    <li><a onclick="go('contact')" data-p="contact">CONTACT US</a></li>
+    <li><span class="sep">|</span></li>
+  </ul>
 </nav>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <ul>
-    <li><a href="#about" onclick="toggleMenu()">About</a></li>
-    <li><a href="#amenities" onclick="toggleMenu()">Amenities</a></li>
-    <li><a href="#dining" onclick="toggleMenu()">Dining</a></li>
-    <li><a href="#spa" onclick="toggleMenu()">Spa</a></li>
-    <li><a href="#gallery" onclick="toggleMenu()">Gallery</a></li>
-    <li><a href="#contact" onclick="toggleMenu()">Book Now</a></li>
-  </ul>
+<!-- ══════════ HOME ══════════ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="slides" id="slides">
+      <div class="slide">
+        <img src="hero.jpg" alt="African savanna landscape">
+        <div class="slide-overlay"></div>
+        <div class="slide-text">
+          <div class="eyebrow-sm">Welcome to Gohori Resort</div>
+          <h1>A Private Bush<br>Retreat in Zimbabwe</h1>
+          <p>Nestled in the heart of Mutoko, surrounded by breathtaking Mashona hills and unspoiled wilderness.</p>
+          <span class="sbtn" onclick="go('accommodation')">Explore Rooms</span>
+          <span class="sbtn2" onclick="go('contact')">Make Enquiry</span>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="hero2.jpg" alt="Safari sunset with acacia tree">
+        <div class="slide-overlay"></div>
+        <div class="slide-text">
+          <div class="eyebrow-sm">The African Experience</div>
+          <h1>Under the Stars,<br>Above the Savanna</h1>
+          <p>Dine under the acacia canopy with lantern-lit evenings and the sounds of the African night.</p>
+          <span class="sbtn" onclick="go('activities')">View Activities</span>
+          <span class="sbtn2" onclick="go('contact')">Book a Stay</span>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="firepit.jpg" alt="Luxury thatched lodge at night">
+        <div class="slide-overlay"></div>
+        <div class="slide-text">
+          <div class="eyebrow-sm">Luxury in the Bush</div>
+          <h1>Thatched Luxury,<br>Untamed Beauty</h1>
+          <p>Our lodges blend authentic African architecture with refined comfort and warm, glowing hospitality.</p>
+          <span class="sbtn" onclick="go('accommodation')">View Lodges</span>
+          <span class="sbtn2" onclick="go('spa')">Discover Spa</span>
+        </div>
+      </div>
+    </div>
+    <button class="arrow prev" onclick="chSlide(-1)">&#8249;</button>
+    <button class="arrow next" onclick="chSlide(1)">&#8250;</button>
+    <div class="dots">
+      <button class="dot on" onclick="toSlide(0)"></button>
+      <button class="dot" onclick="toSlide(1)"></button>
+      <button class="dot" onclick="toSlide(2)"></button>
+    </div>
+  </div>
+
+  <div class="grid-sec">
+    <div class="grow1">
+      <div class="gimg" onclick="go('accommodation')">
+        <img src="grid1.jpg" alt="Luxury bedroom">
+      </div>
+      <div class="gimg" onclick="go('spa')">
+        <img src="RESORT.jpg" alt="Bar and drinks">
+      </div>
+    </div>
+    <div class="grow2">
+      <div class="gimg" onclick="go('activities')">
+        <img src="grid2.jpg" alt="Bush dining with candles">
+      </div>
+      <div class="gimg" onclick="go('gallery')">
+        <img src="pool.jpg" alt="African sunset with acacia">
+      </div>
+      <div class="gimg" onclick="go('gallery')">
+        <img src="out2.jpg" alt="Lodge exterior at night">
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-bg" style="background-image: url('hero.jpg')"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-badge">Mutoko, Zimbabwe</div>
-    <h1>Where <span>Nature</span><br>Meets Luxury</h1>
-    <p class="hero-sub">A premier retreat nestled in the heart of Mutoko</p>
-    <div class="hero-btns">
-      <a href="#contact" class="btn-primary">Book Your Stay</a>
-      <a href="#about" class="btn-outline">Explore Resort</a>
+<!-- ══════════ ACCOMMODATION ══════════ -->
+<div class="page" id="page-accommodation">
+  <div class="phero">
+    <img src="inside.jpg" alt="Luxury lodge bedroom">
+    <div class="phero-ov"></div>
+    <div class="phero-txt">
+      <div class="ey">Where You'll Stay</div>
+      <h1>Accommodation</h1>
+      <div class="bc"><span onclick="go('home')">Home</span> / Accommodation</div>
     </div>
   </div>
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="container">
-    <div class="about-inner">
-      <div class="about-images fade-in">
-        <img class="about-img-main" src="tennnis1.jpg" alt="Gohori Resort grounds">
-        <img class="about-img-accent" src="firepit.jpg" alt="Evening fire pit">
-        <div class="about-badge">
-          <span class="about-badge-num">★</span>
-          <span class="about-badge-text">Premier<br>Retreat</span>
-        </div>
+  <div class="sec sec-cream">
+    <div class="sh reveal">
+      <div class="ey">Our Rooms & Suites</div>
+      <h2>Choose Your Sanctuary</h2>
+      <div class="div"></div>
+      <p>Each chalet and suite is designed to bring the outside in — blending authentic African craft with every modern comfort.</p>
+    </div>
+    <div class="cards">
+      <div class="card reveal">
+        <div class="cimg"><img src="room.jpg" alt="Bush Chalet"><span class="badge">Most Popular</span></div>
+        <div class="cbody"><h3>Bush Chalet</h3><p>Chalets nestled in the treeline with private entrance, sweeping valley views and hand-crafted wooden interiors.</p><div class="tags"><span class="tag">King Bed</span><span class="tag">En-Suite</span><span class="tag">Private Deck</span><span class="tag">WiFi</span></div><div class="cftr"><div><div class="from">From</div><span class="amt">$180</span><span class="per">/night</span></div><button class="bsm" onclick="go('contact')">Book Now</button></div></div>
       </div>
-      <div class="fade-in">
-        <div class="section-label">Our Story</div>
-        <h2 class="section-title">A Sanctuary of<br><em>Refined</em> Escape</h2>
-        <div class="red-line"></div>
-        <p class="section-desc">Gohori Resort is Mutoko's finest destination for rest, recreation and rejuvenation. Set against a dramatic rocky hillside with lush gardens and serene courtyards, we offer an unforgettable blend of natural beauty and world-class comfort.</p>
-        <p class="section-desc" style="margin-top:16px">From our award-winning kitchen to the tranquil spa, every corner of Gohori has been crafted to inspire, restore and delight.</p>
-        <div class="about-stats">
-          <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label">Luxury Chalets</div></div>
-          <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">Dining Experiences</div></div>
-          <div class="stat-card"><div class="stat-num">2</div><div class="stat-label">Sports Courts</div></div>
-          <div class="stat-card"><div class="stat-num">1</div><div class="stat-label">Beauty &amp; Spa</div></div>
-        </div>
+      <div class="card reveal">
+        <div class="cimg"><img src="room.jpg" alt="Luxury Suite"><span class="badge">Premium</span></div>
+        <div class="cbody"><h3>Luxury Suite</h3><p>A separate lounge, outdoor fire pit, butler service and a private plunge pool overlooking the valley.</p><div class="tags"><span class="tag">King Bed</span><span class="tag">Plunge Pool</span><span class="tag">Butler</span><span class="tag">Fire Pit</span></div><div class="cftr"><div><div class="from">From</div><span class="amt">$320</span><span class="per">/night</span></div><button class="bsm" onclick="go('contact')">Book Now</button></div></div>
+      </div>
+      <div class="card reveal">
+        <div class="cimg"><img src="room.jpg" alt="Family Cottage"></div>
+        <div class="cbody"><h3>Family Cottage</h3><p>Spacious two-bedroom cottages with a shared veranda, child-safe garden and a BBQ terrace for families.</p><div class="tags"><span class="tag">2 Bedrooms</span><span class="tag">Family Lounge</span><span class="tag">BBQ</span><span class="tag">Child-Safe</span></div><div class="cftr"><div><div class="from">From</div><span class="amt">$260</span><span class="per">/night</span></div><button class="bsm" onclick="go('contact')">Book Now</button></div></div>
+      </div>
+      <div class="card reveal">
+        <div class="cimg"><img src="room.jpg" alt="Presidential Villa"><span class="badge">Exclusive</span></div>
+        <div class="cbody"><h3>Presidential Villa</h3><p>Three bedrooms, a private chef, dedicated vehicle and a 20-metre infinity pool. The ultimate Gohori experience.</p><div class="tags"><span class="tag">3 Bedrooms</span><span class="tag">Infinity Pool</span><span class="tag">Private Chef</span><span class="tag">Vehicle</span></div><div class="cftr"><div><div class="from">From</div><span class="amt">$680</span><span class="per">/night</span></div><button class="bsm" onclick="go('contact')">Book Now</button></div></div>
+      </div>
+      <div class="card reveal">
+        <div class="cimg"><img src="room.jpg" alt="Honeymoon Tent"><span class="badge">Romantic</span></div>
+        <div class="cbody"><h3>Honeymoon Tent</h3><p>A romantic canvas tent with copper clawfoot bath, rose-petal turndown and direct views into the untouched bush.</p><div class="tags"><span class="tag">King Bed</span><span class="tag">Clawfoot Bath</span><span class="tag">Bush View</span><span class="tag">Turndown</span></div><div class="cftr"><div><div class="from">From</div><span class="amt">$240</span><span class="per">/night</span></div><button class="bsm" onclick="go('contact')">Book Now</button></div></div>
+      </div>
+      <div class="card reveal">
+        <div class="cimg"><img src="room.jpg" alt="Glamping Tent"></div>
+        <div class="cbody"><h3>Glamping Tent</h3><p>Fully equipped canvas tents with real beds, solar lanterns and a shared campfire boma under the stars.</p><div class="tags"><span class="tag">Canvas Tent</span><span class="tag">Shared Boma</span><span class="tag">Solar Power</span><span class="tag">Linen</span></div><div class="cftr"><div><div class="from">From</div><span class="amt">$90</span><span class="per">/night</span></div><button class="bsm" onclick="go('contact')">Book Now</button></div></div>
       </div>
     </div>
+    <div style="text-align:center;margin-top:40px"><span class="btn-g" onclick="go('contact')">Enquire About Availability</span></div>
   </div>
-</section>
+</div>
 
-<!-- AMENITIES -->
-<section class="amenities" id="amenities">
-  <div class="container">
-    <div class="fade-in">
-      <div class="section-label">Experiences</div>
-      <h2 class="section-title" style="color:white">World-Class <em style="color:var(--gold)">Amenities</em></h2>
-      <p class="section-desc">Every facility at Gohori Resort is designed to surpass your expectations, whether you're seeking adventure or tranquility.</p>
-    </div>
-    <div class="amenity-grid fade-in">
-      <div class="amenity-card">
-        <img src="tennis2.jpg" alt="Tennis Court">
-        <div class="amenity-overlay">
-          <div class="amenity-title">Tennis &amp; Sports</div>
-          <div class="amenity-desc">Professional-grade tennis and basketball courts set beneath Mutoko's dramatic hills. Equipment available for hire.</div>
-        </div>
-      </div>
-      <div class="amenity-card">
-        <img src="pool.jpg" alt="Swimming Pool">
-        <div class="amenity-overlay">
-          <div class="amenity-title">Swimming Pool</div>
-          <div class="amenity-desc">Crystal-clear pool surrounded by manicured gardens and sun loungers — perfect for afternoon relaxation.</div>
-        </div>
-      </div>
-      <div class="amenity-card">
-        <img src="firepit.jpg" alt="Fire Pit">
-        <div class="amenity-overlay">
-          <div class="amenity-title">Fire Pit Lounge</div>
-          <div class="amenity-desc">Gather around the stone fire pit in our outdoor lounge for memorable evenings under the stars.</div>
-        </div>
-      </div>
+<!-- ══════════ ACTIVITIES ══════════ -->
+<div class="page" id="page-activities">
+  <div class="phero">
+    <img src="tennnis1.jpg" alt="games">
+    <div class="phero-ov"></div>
+    <div class="phero-txt">
+      <div class="ey">Explore & Experience</div>
+      <h1>Activities</h1>
+      <div class="bc"><span onclick="go('home')">Home</span> / Activities</div>
     </div>
   </div>
-</section>
-
-<!-- DINING -->
-<section class="dining" id="dining">
-  <div class="container">
-    <div class="dining-inner">
-      <div class="dining-gallery fade-in">
-        <img src="group.jpg" alt="Gohori Kitchen Team">
-        <img src="food.jpg" alt="Signature Dish">
-        <img src="foodd.jpg" alt="Fresh Salad">
-        <img src="fooddd.jpg" alt="Fruit Bowl">
-        <img src="circle.jpg" alt="Food spread">
-      </div>
-      <div class="fade-in">
-        <div class="section-label">Cuisine</div>
-        <h2 class="section-title">A <em>Culinary</em><br>Journey</h2>
-        <div class="red-line"></div>
-        <p class="section-desc">Our passionate team of chefs crafts every dish with fresh, locally-sourced ingredients. From hearty Zimbabwean classics to international flavours, every meal at Gohori is a celebration.</p>
-        <ul class="dining-features">
-          <li>Freshly prepared breakfast, lunch and dinner daily</li>
-          <li>Zimbabwean and continental cuisine</li>
-          <li>Outdoor dining in our lush garden courtyard</li>
-          <li>Private dining and event catering available</li>
-          <li>Seasonal menus crafted by our Executive Chef</li>
-        </ul>
-        <a href="#contact" class="btn-primary" style="margin-top:32px; display:inline-block">Make a Reservation</a>
-      </div>
+  <div class="sec sec-cream">
+    <div class="sh reveal">
+      <div class="ey">What To Do</div>
+      <h2>Adventure at Every Turn</h2>
+      <div class="div"></div>
+      <p>Led by expert local guides who bring the land to life with stories, knowledge and genuine passion for the Mutoko wilderness.</p>
+    </div>
+    <div class="acts">
+      <div class="acard reveal"><img src="lady.jpg" alt="Horse Riding"><div class="aov"></div><div class="atxt"><div class="ic"></div><h3>Bush Walks</h3><p>Track animals, learn bush medicine and discover ancient rock art with expert rangers.</p></div></div>
+      <div class="acard reveal"><img src="swimmingpool.jpg" alt="swimming"><div class="aov"></div><div class="atxt"><div class="ic"></div><h3>Game Drives</h3><p>Sunrise and sunset drives in open 4×4s — spot antelope, baboons and dramatic golden light.</p></div></div>
+      <div class="acard reveal"><img src="firepit.jpg" alt="Stargazing"><div class="aov"></div><div class="atxt"><div class="ic"></div><h3>Stargazing</h3><p>Guided astronomy evenings — learn Shona star lore under perfectly dark skies far from any city.</p></div></div>
+      <div class="acard reveal"><img src="tennis2.jpg" alt="Tennis"><div class="aov"></div><div class="atxt"><div class="ic"></div><h3>Hiking</h3><p>Routes from gentle family walks to full-day granite ridge traverses with stunning panoramic views.</p></div></div>
+      <div class="acard reveal"><img src="spa.jpg" alt="Spa"><div class="aov"></div><div class="atxt"><div class="ic"></div><h3>Bush Dinner</h3><p>Private candlelit dinners around a traditional fire boma with chef-curated Zimbabwean menus.</p></div></div>
+      <div class="acard reveal"><img src="outsideview.jpg" alt="Bird Watching"><div class="aov"></div><div class="atxt"><div class="ic">🦅</div><h3>Bird Watching</h3><p>Over 300 species recorded on the estate — from fish eagles to lilac-breasted rollers.</p></div></div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- SPA -->
-<section class="spa" id="spa">
-  <div class="container">
-    <div class="spa-inner">
-      <div class="spa-images fade-in">
-        <div class="spa-images-grid">
-          <img src="spa.jpg" alt="Spa Room" style="aspect-ratio:16/9">
-          <img src="spaa.jpg" alt="Treatment Bed" style="aspect-ratio:1">
-          <img src="tennnis1.jpg" alt="Sports facilities" style="aspect-ratio:1">
-        </div>
-      </div>
-      <div class="spa-text fade-in">
-        <div class="section-label">Wellness</div>
-        <h2 class="section-title">Gohori Beauty<br><em>&amp; Spa</em></h2>
-        <div class="red-line"></div>
-        <p class="section-desc">Surrender to serenity at our dedicated wellness sanctuary. The Gohori Beauty Spa offers an extensive menu of treatments designed to refresh body and soul.</p>
-        <div class="spa-treatments">
-          <div class="treatment"><div class="treatment-name">Massage Therapy</div><div class="treatment-desc">Swedish, deep tissue and relaxation massages by expert therapists</div></div>
-          <div class="treatment"><div class="treatment-name">Body Treatments</div><div class="treatment-desc">Exfoliation, wraps and scrubs using premium products</div></div>
-          <div class="treatment"><div class="treatment-name">Beauty Services</div><div class="treatment-desc">Full salon services including facials, nails and hair</div></div>
-          <div class="treatment"><div class="treatment-name">Couple Packages</div><div class="treatment-desc">Shared spa experiences in our twin treatment rooms</div></div>
-        </div>
-        <a href="#contact" class="btn-primary" style="margin-top:32px; display:inline-block">Book a Treatment</a>
-      </div>
+<!-- ══════════ SPA ══════════ -->
+<div class="page" id="page-spa">
+  <div class="phero">
+    <img src="spa.jpg" alt="Spa and wellness">
+    <div class="phero-ov"></div>
+    <div class="phero-txt">
+      <div class="ey">Rest & Renewal</div>
+      <h1>The Gohori Spa</h1>
+      <div class="bc"><span onclick="go('home')">Home</span> / Spa</div>
     </div>
   </div>
-</section>
-
-<!-- GALLERY -->
-<section class="gallery" id="gallery">
-  <div class="container">
-    <div class="gallery-header fade-in">
-      <div class="section-label" style="justify-content:center; color:var(--gold)">
-        <div style="width:32px;height:1px;background:var(--gold)"></div>
-        Visual Story
-        <div style="width:32px;height:1px;background:var(--gold)"></div>
-      </div>
-      <h2 class="section-title">Life at <em style="color:var(--gold)">Gohori</em></h2>
+  <div class="spa2col">
+    <div class="spav"><img src="spaa.jpg" alt="Spa treatment"></div>
+    <div class="spac">
+      <div class="ey">The Gohori Spa</div>
+      <h2>Ancient Remedies,<br>Modern Sanctuary</h2>
+      <p>Treatments are performed in open-air pavilions overlooking the bush, drawing on centuries of Zimbabwean healing traditions and indigenous plant remedies.</p>
+      <ul class="tlist">
+        <li><span class="tn">Mutoko Stone Massage</span><span class="td">90 MIN</span><span class="tp">$95</span></li>
+        <li><span class="tn">Baobab Body Wrap</span><span class="td">60 MIN</span><span class="tp">$75</span></li>
+        <li><span class="tn">Marula Oil Facial</span><span class="td">60 MIN</span><span class="tp">$70</span></li>
+        <li><span class="tn">Couples Sanctuary</span><span class="td">120 MIN</span><span class="tp">$180</span></li>
+        <li><span class="tn">Bush Herbal Soak</span><span class="td">45 MIN</span><span class="tp">$55</span></li>
+        <li><span class="tn">Full Day Retreat</span><span class="td">Full Day</span><span class="tp">$220</span></li>
+      </ul>
+      <span class="btn" onclick="go('contact')" style="display:inline-block">Book a Treatment</span>
     </div>
   </div>
-  <div class="gallery-grid fade-in">
-    <div class="gallery-item wide"><img src="view.jpg" alt="Resort aerial view"></div>
-    <div class="gallery-item"><img src="tennis2.jpg" alt="Tennis"></div>
-    <div class="gallery-item"><img src="spa.jpg" alt="Spa"></div>
-    <div class="gallery-item"><img src="foodd.jpg" alt="Food spread"></div>
-    <div class="gallery-item"><img src="food.jpg" alt="Signature dish"></div>
-    <div class="gallery-item wide"><img src="lady.jpg" alt="Chef team"></div>
-    <div class="gallery-item"><img src="firepit.jpg" alt="Fire pit"></div>
-    <div class="gallery-item"><img src="ambiance.jpg" alt="Chef group"></div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="container">
-    <div style="text-align:center; margin-bottom:60px" class="fade-in">
-      <div class="section-label" style="justify-content:center; color:var(--gold)">
-        <div style="width:32px;height:1px;background:var(--gold)"></div>
-        Get In Touch
-        <div style="width:32px;height:1px;background:var(--gold)"></div>
-      </div>
-      <h2 class="section-title">Reserve Your <em style="color:var(--gold)">Escape</em></h2>
+  <div class="sec sec-gray">
+    <div class="sh"><div class="ey">The Experience</div><h2>More Than a Treatment</h2><div class="div"></div><p>Every visit to the Gohori Spa is a full sensory journey — aromatic steam room, outdoor cold plunge and birdsong from the bush.</p></div>
+    <div class="susGrid">
+      <div class="susc reveal"><div class="susi">🌿</div><h3>Indigenous Botanicals</h3><p>All products are sourced from Zimbabwe's natural pharmacopoeia — marula, baobab, moringa and over 20 wild herbs harvested sustainably.</p></div>
+      <div class="susc reveal"><div class="susi">🌬️</div><h3>Open-Air Pavilions</h3><p>Our treatment rooms open directly onto the bush — birdsong, breeze and wild sage are part of every session.</p></div>
+      <div class="susc reveal"><div class="susi">💧</div><h3>Hydrotherapy</h3><p>A solar-heated plunge pool, cold waterfall shower and steam room inspired by traditional Shona bathing practices.</p></div>
     </div>
-    <div class="contact-inner">
+  </div>
+</div>
 
-      <!-- CONTACT INFO -->
-      <div class="contact-info fade-in">
-        <p>We would love to welcome you to Gohori Resort. Reach out to our reservations team and let us craft the perfect getaway for you.</p>
-        <div class="contact-details">
-          <div class="contact-detail">
-            <div class="contact-icon">📍</div>
-            <div class="contact-detail-text">
-              <h4>Location</h4>
-              <p>Gohori Resort, Mutoko<br>Mashonaland East, Zimbabwe</p>
-            </div>
-          </div>
-          <div class="contact-detail">
-            <div class="contact-icon">📞</div>
-            <div class="contact-detail-text">
-              <h4>Phone</h4>
-              <a href="tel:+263772000000">+263 77 200 0000</a>
-            </div>
-          </div>
-          <div class="contact-detail">
-            <div class="contact-icon">✉️</div>
-            <div class="contact-detail-text">
-              <h4>Email</h4>
-              <a href="mailto:info@gohoriresort.com">info@gohoriresort.com</a>
-            </div>
-          </div>
-          <div class="contact-detail">
-            <div class="contact-icon">🕐</div>
-            <div class="contact-detail-text">
-              <h4>Check-in / Check-out</h4>
-              <p>Check-in: 2:00 PM · Check-out: 11:00 AM</p>
-            </div>
-          </div>
-        </div>
+<!-- ══════════ GALLERY ══════════ -->
+<div class="page" id="page-gallery">
+  <div class="phero">
+    <img src="outsideview.jpg" alt="African landscape">
+    <div class="phero-ov"></div>
+    <div class="phero-txt">
+      <div class="ey">Visual Impressions</div>
+      <h1>Gallery</h1>
+      <div class="bc"><span onclick="go('home')">Home</span> / Gallery</div>
+    </div>
+  </div>
+  <div class="sec sec-cream">
+    <div class="sh reveal"><div class="ey">Our World</div><h2>Gohori Through the Lens</h2><div class="div"></div><p>Click any image to view it full size.</p></div>
+    <div class="galg">
+      <div class="gth" onclick="openLB(0)"><img src="inside.jpg" alt="Bedroom"></div>
+      <div class="gth" onclick="openLB(1)"><img src="outsideview.jpg" alt="Sunset savanna"></div>
+      <div class="gth" onclick="openLB(2)"><img src="dining.jpg" alt="Candlelit dining"></div>
+      <div class="gth" onclick="openLB(3)"><img src="hero.jpg" alt="Lodge exterior"></div>
+      <div class="gth" onclick="openLB(4)"><img src="grid1.jpg" alt="African landscape"></div>
+      <div class="gth" onclick="openLB(5)"><img src="spaa.jpg" alt="Spa treatment"></div>
+      <div class="gth" onclick="openLB(6)"><img src="RESORT.jpg" alt="Hiking trail"></div>
+      <div class="gth" onclick="openLB(7)"><img src="firepit.jpg" alt="Starry sky"></div>
+      <div class="gth" onclick="openLB(8)"><img src="grid2.jpg" alt="Elephant in wild"></div>
+      <div class="gth" onclick="openLB(9)"><img src="swimmingpool.jpg" alt="Resort pool"></div>
+      <div class="gth" onclick="openLB(10)"><img src="out2.jpg" alt="Bush camp"></div>
+      <div class="gth" onclick="openLB(11)"><img src="fooddd.jpg" alt="Bar and lounge"></div>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb">
+  <div class="lbi">
+    <button class="lbc" onclick="closeLB()">✕</button>
+    <button class="lbn lbprev" onclick="moveLB(-1)">&#8249;</button>
+    <img id="lbimg" src="" alt="Gallery image">
+    <button class="lbn lbnext" onclick="moveLB(1)">&#8250;</button>
+    <div class="lbcap" id="lbcap"></div>
+  </div>
+</div>
+
+<!-- ══════════ SUSTAINABLE ══════════ -->
+<div class="page" id="page-sustainable">
+  <div class="phero">
+    <img src="out2.jpg" alt="Green landscape Zimbabwe">
+    <div class="phero-ov"></div>
+    <div class="phero-txt">
+      <div class="ey">Our Commitment</div>
+      <h1>Sustainability</h1>
+      <div class="bc"><span onclick="go('home')">Home</span> / Sustainable</div>
+    </div>
+  </div>
+  <div class="sec sec-cream">
+    <div class="sh reveal"><div class="ey">How We Operate</div><h2>Luxury That Leaves the Land Better</h2><div class="div"></div><p>We believe true luxury and environmental responsibility are inseparable. Every decision considers the land, the community and the next generation.</p></div>
+    <div class="susGrid">
+      <div class="susc reveal"><div class="susi">☀️</div><h3>Solar Power</h3><p>100% of the resort's energy is supplied by our solar farm with battery storage. Fully off-grid since 2019.</p></div>
+      <div class="susc reveal"><div class="susi">💧</div><h3>Water Harvesting</h3><p>Rainwater harvesting and closed-loop greywater recycling means we use 70% less water than comparable properties.</p></div>
+      <div class="susc reveal"><div class="susi">🌱</div><h3>Organic Gardens</h3><p>Our kitchen garden produces over 60% of guest vegetables — grown without pesticides using traditional Shona composting.</p></div>
+      <div class="susc reveal"><div class="susi">🐘</div><h3>Wildlife Corridor</h3><p>We partner with neighbouring landowners to maintain a 2,000-hectare corridor connecting the resort to Mutoko communal lands.</p></div>
+      <div class="susc reveal"><div class="susi">👥</div><h3>Community Employment</h3><p>95% of our staff come from within 15 km. We pay above-market rates and fund school scholarships for staff children.</p></div>
+      <div class="susc reveal"><div class="susi">♻️</div><h3>Zero Waste</h3><p>All organic waste is composted on-site. Plastics eliminated from guest operations. Zero-landfill status achieved 2022.</p></div>
+    </div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="snum">100%</div><div class="slbl">Solar Powered</div></div>
+    <div class="stat"><div class="snum">70%</div><div class="slbl">Less Water Used</div></div>
+    <div class="stat"><div class="snum">95%</div><div class="slbl">Local Staff</div></div>
+    <div class="stat"><div class="snum">2022</div><div class="slbl">Zero Landfill Since</div></div>
+  </div>
+</div>
+
+<!-- ══════════ CONTACT ══════════ -->
+<div class="page" id="page-contact">
+  <div class="phero">
+    <img src="hero.jpg" alt="Mutoko hills Zimbabwe">
+    <div class="phero-ov"></div>
+    <div class="phero-txt">
+      <div class="ey">Get in Touch</div>
+      <h1>Contact & Reservations</h1>
+      <div class="bc"><span onclick="go('home')">Home</span> / Contact Us</div>
+    </div>
+  </div>
+  <div class="sec sec-cream">
+    <div class="conwrap">
+      <div class="coninfo reveal">
+        <div class="ey">Reach Us</div>
+        <h2>We'd Love to<br>Hear From You</h2>
+        <p>Whether planning a stay, enquiring about a special event or simply wanting to know more — our team responds within 4 hours.</p>
+        <div class="cdet"><div class="cicn">📍</div><div><div class="clbl">Address</div><div class="cval">Gohori Resort, Mutoko, Masheast, Zimbabwe</div></div></div>
+        <div class="cdet"><div class="cicn">📞</div><div><div class="clbl">Telephone</div><div class="cval">+263 78 565 6337</div></div></div>
+        <div class="cdet"><div class="cicn">📱</div><div><div class="clbl">WhatsApp</div><div class="cval">+263 78 565 6337</div></div></div>
+        <div class="cdet"><div class="cicn">✉️</div><div><div class="clbl">Email</div><div class="cval">resevation@gohori.com</div></div></div>
+        <div class="cdet"><div class="cicn">🕐</div><div><div class="clbl">Office Hours</div><div class="cval">Mon–Sun: 7:00 AM – 8:00 PM (CAT)</div></div></div>
       </div>
 
-      <!-- CONTACT FORM (Formspree) -->
-      <div class="contact-form fade-in">
-        <h3>Make a Reservation</h3>
-        <!--
-          FORMSPREE SETUP:
-          1. Sign up at https://formspree.io
-          2. Create a new form and copy your endpoint URL
-          3. Replace "https://formspree.io/f/YOUR_FORM_ID" below with your actual endpoint
-        -->
-        <form id="reservationForm">
-          <input type="hidden" name="_replyto" value="">
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="first_name">First Name</label>
-              <input type="text" id="first_name" name="first_name" placeholder="John" required>
-            </div>
-            <div class="form-group">
-              <label for="last_name">Last Name</label>
-              <input type="text" id="last_name" name="last_name" placeholder="Doe" required>
-            </div>
+      <!-- ── CONTACT FORM ── -->
+      <div class="cform reveal">
+        <h3>Send an Enquiry</h3>
+        <form id="contactForm" onsubmit="submitForm(event)" novalidate>
+          <div class="frow">
+            <div class="fg"><label for="fn">First Name</label><input type="text" id="fn" name="firstName" placeholder="John" required></div>
+            <div class="fg"><label for="ln">Last Name</label><input type="text" id="ln" name="lastName" placeholder="Doe" required></div>
           </div>
-          <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+          <div class="fg"><label for="em">Email Address</label><input type="email" id="em" name="email" placeholder="john@example.com" required></div>
+          <div class="fg"><label for="ph">Phone / WhatsApp</label><input type="tel" id="ph" name="phone" placeholder="+263 …"></div>
+          <div class="frow">
+            <div class="fg"><label for="ci">Check In</label><input type="date" id="ci" name="checkIn"></div>
+            <div class="fg"><label for="co">Check Out</label><input type="date" id="co" name="checkOut"></div>
           </div>
-          <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" placeholder="+263 77 ...">
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="checkin">Check-in</label>
-              <input type="date" id="checkin" name="checkin">
+          <div class="frow">
+            <div class="fg">
+              <label for="guests">Guests</label>
+              <select id="guests" name="guests">
+                <option>2 Adults</option>
+                <option>1 Adult</option>
+                <option>3 Adults</option>
+                <option>2 Adults + Children</option>
+                <option>Group (5+)</option>
+              </select>
             </div>
-            <div class="form-group">
-              <label for="checkout">Check-out</label>
-              <input type="date" id="checkout" name="checkout">
+            <div class="fg">
+              <label for="interest">Interest</label>
+              <select id="interest" name="interest">
+                <option>Accommodation</option>
+                <option>Spa Treatment</option>
+                <option>Day Visit</option>
+                <option>Wedding / Event</option>
+                <option>Corporate Retreat</option>
+              </select>
             </div>
           </div>
-          <div class="form-group">
-            <label for="interest">Interest</label>
-            <select id="interest" name="interest">
-              <option>Accommodation</option>
-              <option>Dining Reservation</option>
-              <option>Spa Treatment</option>
-              <option>Event / Conference</option>
-              <option>General Enquiry</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Tell us about your visit..."></textarea>
-          </div>
-          <!-- Honeypot spam filter (Formspree ignores this field) -->
-          <input type="text" name="_gotcha" style="display:none">
-          <button type="submit" class="btn-submit">Send Enquiry →</button>
+          <div class="fg"><label for="msg">Message</label><textarea id="msg" name="message" placeholder="Tell us about your ideal visit…"></textarea></div>
+          <button type="submit" class="fsub">SEND ENQUIRY →</button>
         </form>
       </div>
+      <!-- ── END CONTACT FORM ── -->
 
     </div>
   </div>
-</section>
+</div>
 
-<!-- SUCCESS MODAL -->
-<div id="successModal" style="
-  display:none; position:fixed; inset:0; z-index:9999;
-  background:rgba(10,18,40,0.85); backdrop-filter:blur(6px);
-  align-items:center; justify-content:center;
-">
-  <div style="
-    background:#fff; max-width:460px; width:90%; border-radius:4px;
-    padding:48px 40px; text-align:center; position:relative;
-    box-shadow:0 32px 80px rgba(0,0,0,0.4);
-    animation: fadeUp 0.4s ease both;
-  ">
-    <div style="
-      width:64px; height:64px; border-radius:50%;
-      background:var(--navy); display:flex; align-items:center;
-      justify-content:center; margin:0 auto 24px; font-size:28px;
-    ">✓</div>
-    <h3 style="font-family:'Playfair Display',serif; font-size:26px; color:var(--navy); margin-bottom:12px;">
-      Enquiry Received!
-    </h3>
-    <p style="font-size:15px; color:var(--gray); line-height:1.7; margin-bottom:32px;">
-      Thank you for reaching out to Gohori Resort. Our reservations team will be in touch with you shortly.
-    </p>
-    <button onclick="closeModal()" style="
-      background:var(--red); color:white; border:none;
-      padding:14px 40px; font-family:'Poppins',sans-serif;
-      font-size:13px; font-weight:600; letter-spacing:2px;
-      text-transform:uppercase; border-radius:2px; cursor:pointer;
-      transition:background 0.3s;
-    ">Close</button>
+<!-- ══════════ SHARED FOOTER ══════════ -->
+<footer id="footer">
+  <div class="fgrid">
+    <div class="fcol">
+      <h3>About Us</h3>
+      <p>Gohori — a private bush resort that showcases the best of Mutoko, a picture-perfect peri-urban town in Mashonaland East, Zimbabwe. Offering panoramic hill views and unforgettable experiences.</p>
+    </div>
+    <div class="fcol">
+      <h3>Menu</h3>
+      <ul>
+        <li><a onclick="go('home')">HOME</a></li>
+        <li><a onclick="go('accommodation')">ACCOMMODATION</a></li>
+        <li><a onclick="go('activities')">ACTIVITIES</a></li>
+        <li><a onclick="go('spa')">SPA</a></li>
+        <li><a onclick="go('gallery')">GALLERY</a></li>
+        <li><a onclick="go('sustainable')">SUSTAINABLE</a></li>
+        <li><a onclick="go('contact')">CONTACT US</a></li>
+      </ul>
+    </div>
+    <div class="fcol">
+      <h3>Gallery</h3>
+      <div class="fgal">
+        <div class="fgth"><img src="view.jpg" alt=""></div>
+        <div class="fgth"><img src="people.jpg" alt=""></div>
+        <div class="fgth"><img src="fruits.jpg" alt=""></div>
+        <div class="fgth"><img src="firepit.jpg" alt=""></div>
+        <div class="fgth"><img src="out2.jpg" alt=""></div>
+        <div class="fgth"><img src="circle.jpg" alt=""></div>
+      </div>
+    </div>
+    <div class="fcol">
+      <h3>Contact Us</h3>
+      <address>
+        Gohori Resort<br>Mutoko, Masheast<br>Zimbabwe<br>
+        <a href="tel:+263785656337">+263 78 565 6337</a><br>
+        <a href="tel:+263785656337">+263 78 565 6337</a><br>
+        <a href="mailto:resevation@gohori.com">resevation@gohori.com</a>
+      </address>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>© 2024 Gohori Resort: All Rights Reserved</span>
+    <span class="fsoc">
+      <a href="#">f</a><a href="#">◎</a><a href="#">𝕏</a><a href="#">✆</a>
+    </span>
+  </div>
+</footer>
+
+<!-- WhatsApp float -->
+<a href="https://wa.me/263785656337" class="wa" title="Chat on WhatsApp" target="_blank">✆</a>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- ── SUCCESS POPUP ── -->
+<div class="popup-overlay" id="popup">
+  <div class="popup-box">
+    <div class="popup-icon">✅</div>
+    <h3>Enquiry Sent!</h3>
+    <p>Thank you for reaching out to Gohori Resort.<br>We have received your message and will get back to you <strong>as soon as possible</strong>.</p>
+    <button class="popup-close" onclick="closePopup()">CLOSE</button>
   </div>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">GOHORI <span>RESORT</span></div>
-  <p class="footer-tagline">Where Nature Meets Luxury · Mutoko, Zimbabwe</p>
-  <div class="divider"></div>
-  <ul class="footer-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#amenities">Amenities</a></li>
-    <li><a href="#dining">Dining</a></li>
-    <li><a href="#spa">Spa &amp; Beauty</a></li>
-    <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <p>© 2026 Gohori Resort. All rights reserved.</p>
-</footer>
-
 <script>
-  // Navbar scroll
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+/* PAGE ROUTING */
+function go(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  const el=document.getElementById('page-'+p);
+  if(el) el.classList.add('active');
+  else document.getElementById('page-home').classList.add('active');
+  document.querySelectorAll('.navlist a[data-p]').forEach(a=>a.classList.toggle('on',a.dataset.p===p));
+  window.scrollTo({top:0,behavior:'smooth'});
+  closeNav();
+  setTimeout(chkReveal,120);
+}
+
+/* SLIDER */
+let cur=0,tot=3,autoT;
+function chSlide(d){cur=(cur+d+tot)%tot;updSlider();resetAuto()}
+function toSlide(i){cur=i;updSlider();resetAuto()}
+function updSlider(){
+  document.getElementById('slides').style.transform=`translateX(-${cur*100}%)`;
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===cur));
+}
+function resetAuto(){clearInterval(autoT);autoT=setInterval(()=>chSlide(1),5500)}
+autoT=setInterval(()=>chSlide(1),5500);
+
+/* MOBILE NAV */
+function toggleNav(){
+  document.getElementById('navlist').classList.toggle('open');
+  document.getElementById('burger').classList.toggle('open');
+}
+function closeNav(){
+  document.getElementById('navlist').classList.remove('open');
+  document.getElementById('burger').classList.remove('open');
+}
+
+/* SCROLL REVEAL */
+function chkReveal(){
+  document.querySelectorAll('.reveal:not(.vis)').forEach(el=>{
+    if(el.getBoundingClientRect().top<window.innerHeight-50) el.classList.add('vis');
   });
+}
+window.addEventListener('scroll',chkReveal,{passive:true});
+chkReveal();
 
-  // Mobile menu
-  function toggleMenu() {
-    document.getElementById('mobileMenu').classList.toggle('open');
+/* NAV SHADOW */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').style.boxShadow=window.scrollY>10?'0 4px 20px rgba(0,0,0,.14)':'0 2px 10px rgba(0,0,0,.08)';
+},{passive:true});
+
+/* DEFAULT DATES */
+(function(){
+  const t=new Date(),ci=new Date(t),co=new Date(t);
+  ci.setDate(t.getDate()+1);co.setDate(t.getDate()+3);
+  const f=d=>d.toISOString().split('T')[0];
+  const a=document.getElementById('ci'),b=document.getElementById('co');
+  if(a)a.value=f(ci);if(b)b.value=f(co);
+})();
+
+/* FORM SUBMIT — shows popup */
+function submitForm(e){
+  e.preventDefault();
+  const fn=document.getElementById('fn').value.trim();
+  const em=document.getElementById('em').value.trim();
+  if(!fn){showToast('Please enter your first name.');return}
+  if(!em||!em.includes('@')){showToast('Please enter a valid email address.');return}
+  const ci=document.getElementById('ci').value;
+  const co=document.getElementById('co').value;
+  if(ci&&co&&new Date(co)<=new Date(ci)){showToast('Check-out must be after check-in.');return}
+  /* All good — show popup and reset form */
+  document.getElementById('popup').classList.add('on');
+  document.getElementById('contactForm').reset();
+  /* Restore default dates after reset */
+  const t=new Date(),cid=new Date(t),cod=new Date(t);
+  cid.setDate(t.getDate()+1);cod.setDate(t.getDate()+3);
+  const f=d=>d.toISOString().split('T')[0];
+  document.getElementById('ci').value=f(cid);
+  document.getElementById('co').value=f(cod);
+}
+
+/* CLOSE POPUP */
+function closePopup(){
+  document.getElementById('popup').classList.remove('on');
+}
+/* Close popup on overlay click */
+document.getElementById('popup').addEventListener('click',function(e){
+  if(e.target===this) closePopup();
+});
+/* Close popup on Escape key */
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape') closePopup();
+});
+
+/* TOAST */
+function showToast(m){
+  const t=document.getElementById('toast');
+  t.textContent=m;t.classList.add('on');
+  setTimeout(()=>t.classList.remove('on'),3600);
+}
+
+/* LIGHTBOX */
+const LB=[
+  {src:'inside.jpg',cap:'Luxury Bedroom'},
+  {src:'outsideview.jpg',cap:'Safari Sunset'},
+  {src:'dining.jpg',cap:'Candlelit Bush Dining'},
+  {src:'hero.jpg',cap:'Lodge Exterior'},
+  {src:'grid1.jpg',cap:'African Landscape'},
+  {src:'spaa.jpg',cap:'Spa & Wellness'},
+  {src:'RESORT.jpg',cap:'The Resort'},
+  {src:'firepit.jpg',cap:'Fire Pit Evenings'},
+  {src:'grid2.jpg',cap:'Bush Experiences'},
+  {src:'swimmingpool.jpg',cap:'Resort Pool'},
+  {src:'out2.jpg',cap:'Bush Camp'},
+  {src:'fooddd.jpg',cap:'Dining'},
+];
+let lbI=0;
+function openLB(i){lbI=i;renderLB();document.getElementById('lb').classList.add('on')}
+function closeLB(){document.getElementById('lb').classList.remove('on')}
+function moveLB(d){lbI=(lbI+d+LB.length)%LB.length;renderLB()}
+function renderLB(){
+  document.getElementById('lbimg').src=LB[lbI].src;
+  document.getElementById('lbcap').textContent=LB[lbI].cap+' ('+(lbI+1)+'/'+LB.length+')';
+}
+document.getElementById('lb').addEventListener('click',function(e){if(e.target===this)closeLB()});
+document.addEventListener('keydown',e=>{
+  if(document.getElementById('lb').classList.contains('on')){
+    if(e.key==='Escape')closeLB();
+    if(e.key==='ArrowLeft')moveLB(-1);
+    if(e.key==='ArrowRight')moveLB(1);
   }
-
-  // Scroll fade-in
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-  // Modal helpers
-  function showModal() {
-    const modal = document.getElementById('successModal');
-    modal.style.display = 'flex';
-  }
-  function closeModal() {
-    document.getElementById('successModal').style.display = 'none';
-  }
-  // Close modal on backdrop click
-  document.getElementById('successModal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-  });
-
-  // AJAX form submission — stays on page, no Formspree redirect
-  document.getElementById('reservationForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const form = e.target;
-    const btn = form.querySelector('.btn-submit');
-    const originalText = btn.textContent;
-
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
-
-    try {
-      const response = await fetch('https://formspree.io/f/xvzyvnql', {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (response.ok) {
-        form.reset();       // Clear all fields
-        showModal();        // Show success message
-      } else {
-        const data = await response.json();
-        const msg = data.errors ? data.errors.map(x => x.message).join(', ') : 'Something went wrong. Please try again.';
-        alert('Error: ' + msg);
-      }
-    } catch (err) {
-      alert('Network error. Please check your connection and try again.');
-    } finally {
-      btn.textContent = originalText;
-      btn.disabled = false;
-    }
-  });
+});
 </script>
 </body>
 </html>
