@@ -83,7 +83,7 @@ nav{background:var(--white);padding:0 32px;display:flex;align-items:center;justi
 .grid-sec{display:grid;grid-template-rows:auto auto}
 .grow1{display:grid;grid-template-columns:1fr 1fr;height:250px}
 .grow2{display:grid;grid-template-columns:1fr 1fr 1fr;height:270px}
-.gimg{overflow:hidden;position:relative;cursor:pointer}
+.gimg{overflow:hidden;position:relative}
 .gimg::before{content:'';position:absolute;inset:0;opacity:0;background:rgba(26,42,74,.3);z-index:1;transition:opacity .3s}
 .gimg:hover::before{opacity:1}
 .gimg img{transition:transform .5s;margin:5px;}
@@ -285,7 +285,7 @@ footer{background:var(--navy);color:#fff;padding:52px 48px 0}
 
 @media(max-width:1024px){
   .cards{grid-template-columns:1fr 1fr}
-  .fgrid{grid-template-columns:1fr 1fr}
+  /* footer keeps 4-column desktop layout */
   .testis{grid-template-columns:1fr}
 }
 @media(max-width:900px){
@@ -330,7 +330,7 @@ footer{background:var(--navy);color:#fff;padding:52px 48px 0}
   .acts{grid-template-columns:1fr}
   .susGrid{grid-template-columns:1fr}
   .frow{grid-template-columns:1fr}
-  .fgrid{grid-template-columns:1fr}
+  /* footer keeps 4-column layout on small screens too */
 
   /* ── CHANGE 2: Keep 2-col / 3-col grid on mobile (not stacked) with hover zoom ── */
   .grow1{
@@ -452,21 +452,21 @@ footer{background:var(--navy);color:#fff;padding:52px 48px 0}
 
   <div class="grid-sec">
     <div class="grow1">
-      <div class="gimg" onclick="go('accommodation')">
+      <div class="gimg">
         <img src="grid1.jpg" alt="Luxury bedroom">
       </div>
-      <div class="gimg" onclick="go('spa')">
+      <div class="gimg">
         <img src="RESORT.jpg" alt="Bar and drinks">
       </div>
     </div>
     <div class="grow2">
-      <div class="gimg" onclick="go('activities')">
+      <div class="gimg">
         <img src="grid2.jpg" alt="Bush dining with candles">
       </div>
-      <div class="gimg" onclick="go('gallery')">
+      <div class="gimg">
         <img src="pool.jpg" alt="African sunset with acacia">
       </div>
-      <div class="gimg" onclick="go('gallery')">
+      <div class="gimg">
         <img src="out2.jpg" alt="Lodge exterior at night">
       </div>
     </div>
