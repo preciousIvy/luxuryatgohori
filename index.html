@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gohori Resort – Mutoko, Zimbabwe</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -224,22 +225,24 @@ nav{background:var(--white);padding:0 32px;display:flex;align-items:center;justi
 .fsub:hover{background:var(--gold)}
 .fok{display:none;text-align:center;padding:16px;color:#2e7d32;background:#e8f5e9;border-radius:3px;font-weight:700;margin-top:14px;font-size:14px}
 
-footer{background:var(--navy);color:#fff;padding:52px 48px 0}
-.fgrid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:30px;padding-bottom:40px}
-.fcol h3{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;color:#fff}
-.fcol p{font-size:13px;line-height:1.7;color:rgba(255,255,255,.72)}
+footer{background:var(--navy);color:#fff;padding:40px 0 0}
+.fgrid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0;padding-bottom:0}
+.fcol{border:2px solid var(--red);padding:22px 18px 26px;margin:-1px}
+.fcol h3{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;color:#fff}
+.fcol p{font-size:11px;line-height:1.7;color:rgba(255,255,255,.72)}
 .fcol ul{list-style:none}
-.fcol ul li{margin-bottom:8px}
-.fcol ul li a{color:rgba(255,255,255,.72);font-size:13px;transition:color .2s;cursor:pointer}
+.fcol ul li{margin-bottom:7px}
+.fcol ul li a{color:rgba(255,255,255,.72);font-size:11px;transition:color .2s;cursor:pointer}
 .fcol ul li a:hover{color:var(--gold)}
-.fcol address{font-style:normal;font-size:13px;color:rgba(255,255,255,.72);line-height:1.9}
+.fcol address{font-style:normal;font-size:11px;color:rgba(255,255,255,.72);line-height:1.9}
 .fcol address a{color:rgba(255,255,255,.72)}
 .fcol address a:hover{color:var(--gold)}
-.fgal{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
-.fgth{height:56px;border-radius:2px;overflow:hidden}
+.fgal{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.fgth{aspect-ratio:1/1;border-radius:2px;overflow:hidden}
 .fgth img{width:100%;height:100%;object-fit:cover}
-.fbot{border-top:1px solid rgba(255,255,255,.14);padding:18px 0;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(255,255,255,.45)}
-.fsoc a{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);font-size:13px;margin-left:6px;transition:background .2s}
+.fbot{border-top:2px solid var(--red);padding:14px 20px;display:flex;flex-direction:column;align-items:center;gap:10px;font-size:11px;color:rgba(255,255,255,.45);text-align:center}
+.fbot-copy{text-align:center;width:100%}
+.fsoc a{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.1);color:rgba(255,255,255,.65);font-size:14px;margin:0 4px;transition:background .2s}
 .fsoc a:hover{background:var(--gold);color:#fff}
 
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
@@ -248,8 +251,9 @@ footer{background:var(--navy);color:#fff;padding:52px 48px 0}
 .toast{position:fixed;bottom:28px;right:28px;z-index:9998;background:var(--navy);color:#fff;padding:13px 22px;border-radius:3px;font-size:13px;box-shadow:var(--shx);transform:translateY(70px);opacity:0;transition:transform .4s,opacity .4s;border-left:4px solid var(--gold);pointer-events:none}
 .toast.on{transform:translateY(0);opacity:1}
 
-.wa{position:fixed;bottom:26px;left:26px;z-index:999;width:52px;height:52px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.4);font-size:24px;color:#fff;transition:transform .2s;text-decoration:none}
-.wa:hover{transform:scale(1.1)}
+.wa{position:fixed;bottom:26px;right:26px;left:auto;z-index:9990;width:56px;height:56px;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.5);font-size:22px;color:#fff;transition:transform .2s,box-shadow .2s;text-decoration:none;animation:waPulse 2.2s infinite}
+.wa:hover{transform:scale(1.12);box-shadow:0 6px 28px rgba(37,211,102,.7);animation:none}
+@keyframes waPulse{0%,100%{box-shadow:0 0 0 0 rgba(37,211,102,.55)}60%{box-shadow:0 0 0 14px rgba(37,211,102,0)}}
 
 /* ── POPUP MODAL ── */
 .popup-overlay{
@@ -349,6 +353,13 @@ footer{background:var(--navy);color:#fff;padding:52px 48px 0}
   .slide-text h1{font-size:26px}
   .sbtn2{display:none}
   .lbprev,.lbnext{display:none}
+  /* footer: 2x2 grid on smallest screens so all 4 cols stay visible */
+  footer{padding:0}
+  .fgrid{grid-template-columns:1fr 1fr}
+  .fcol{padding:16px 12px 18px}
+  .fcol h3{font-size:11px;margin-bottom:10px}
+  .fcol p,.fcol ul li a,.fcol address{font-size:10px}
+  .fgal{gap:3px}
 }
 </style>
 </head>
@@ -359,10 +370,10 @@ footer{background:var(--navy);color:#fff;padding:52px 48px 0}
   <span>Reservation: &nbsp;<strong>+263 78 565 6337</strong></span>
   <span style="display:flex;align-items:center;gap:4px;">Follow Us:
     <span class="soc">
-      <a href="#" title="Facebook">f</a>
-      <a href="#" title="Instagram">◎</a>
-      <a href="#" title="Twitter">𝕏</a>
-      <a href="#" title="WhatsApp">✆</a>
+      <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" title="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://wa.me/263785656337" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
     </span>
   </span>
 </div>
@@ -767,15 +778,18 @@ footer{background:var(--navy);color:#fff;padding:52px 48px 0}
     </div>
   </div>
   <div class="fbot">
-    <span>© 2024 Gohori Resort: All Rights Reserved</span>
     <span class="fsoc">
-      <a href="#">f</a><a href="#">◎</a><a href="#">𝕏</a><a href="#">✆</a>
+      <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" title="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://wa.me/263785656337" title="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
     </span>
+    <span class="fbot-copy">© 2024 Gohori Resort: All Rights Reserved</span>
   </div>
 </footer>
 
 <!-- WhatsApp float -->
-<a href="https://wa.me/263785656337" class="wa" title="Chat on WhatsApp" target="_blank">✆</a>
+<a href="https://wa.me/263785656337" class="wa" title="Chat on WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
 <!-- Toast -->
 <div class="toast" id="toast"></div>
