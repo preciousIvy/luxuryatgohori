@@ -31,13 +31,16 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .page{display:none}
 .page.active{display:block}
 
-.topbar{background:var(--white);border-bottom:1px solid #eee;padding:8px 32px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#555;}
-.topbar strong{color:var(--navy)}
+.topbar{background:var(--navy); border-bottom:1px solid #e9e9e9;padding:8px 32px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#555;}
+.topbar span{
+  color: #fff;
+}
+.topbar strong{color:var(--white)} 
 .soc a{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:#eee;color:#444;font-size:12px;margin-left:5px;transition:background .2s,color .2s;}
 .soc a:hover{background:var(--navy);color:#fff}
 
 nav{background:var(--white);padding:0 32px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 10px rgba(0,0,0,.08);position:sticky;top:0;z-index:1000;height:70px;}
-.logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer; }
 .logo img{width:52px;height:52px}
 .brand{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--gold);letter-spacing:3px;line-height:1}
 .sub{font-size:9px;letter-spacing:5px;color:var(--light);text-transform:uppercase;margin-top:2px}
@@ -741,11 +744,11 @@ footer{background:var(--navy);color:#fff;padding:40px 0 0}
 <footer id="footer">
   <div class="fgrid">
     <div class="fcol">
-      <h3>About Us</h3>
+      <h4>About Us</h4>
       <p>Gohori — a private bush resort that showcases the best of Mutoko, a picture-perfect peri-urban town in Mashonaland East, Zimbabwe. Offering panoramic hill views and unforgettable experiences.</p>
     </div>
     <div class="fcol">
-      <h3>Menu</h3>
+      <h4>Menu</h4>
       <ul>
         <li><a onclick="go('home')">HOME</a></li>
         <li><a onclick="go('accommodation')">ACCOMMODATION</a></li>
@@ -757,7 +760,7 @@ footer{background:var(--navy);color:#fff;padding:40px 0 0}
       </ul>
     </div>
     <div class="fcol">
-      <h3>Gallery</h3>
+      <h4>Gallery</h4>
       <div class="fgal">
         <div class="fgth"><img src="view.jpg" alt=""></div>
         <div class="fgth"><img src="people.jpg" alt=""></div>
@@ -768,7 +771,7 @@ footer{background:var(--navy);color:#fff;padding:40px 0 0}
       </div>
     </div>
     <div class="fcol">
-      <h3>Contact Us</h3>
+      <h4>Contact Us</h4>
       <address>
         Gohori Resort<br>Mutoko, Masheast<br>Zimbabwe<br>
         <a href="tel:+263785656337">+263 78 565 6337</a><br>
