@@ -299,6 +299,7 @@ footer{background:var(--navy);color:#fff;padding:52px 48px 0}
   .hero{height:360px}
   .slide-text h1{font-size:32px}
   .slide-text{bottom:60px}
+  /* ── CHANGE 2: Keep desktop grid layout on mobile for home page grid images ── */
   .grow1{height:190px}
   .grow2{height:190px}
   .spa2col{grid-template-columns:1fr}
@@ -312,15 +313,37 @@ footer{background:var(--navy);color:#fff;padding:52px 48px 0}
   .phero-txt{padding:0 24px 28px}
 }
 @media(max-width:600px){
+  /* ── CHANGE 1: Shrink topbar on mobile to fit phone screen ── */
+  .topbar{
+    padding:5px 10px;
+    font-size:10px;
+    gap:4px;
+  }
+  .soc a{
+    width:20px;
+    height:20px;
+    font-size:9px;
+    margin-left:3px;
+  }
+
   .cards{grid-template-columns:1fr}
   .acts{grid-template-columns:1fr}
   .susGrid{grid-template-columns:1fr}
   .frow{grid-template-columns:1fr}
   .fgrid{grid-template-columns:1fr}
-  .grow1{grid-template-columns:1fr;height:auto}
-  .grow1 .gimg{height:200px}
-  .grow2{grid-template-columns:1fr;height:auto}
-  .grow2 .gimg{height:180px}
+
+  /* ── CHANGE 2: Keep 2-col / 3-col grid on mobile (not stacked) with hover zoom ── */
+  .grow1{
+    grid-template-columns:1fr 1fr;
+    height:160px;
+  }
+  .grow2{
+    grid-template-columns:1fr 1fr 1fr;
+    height:130px;
+  }
+  /* ensure hover zoom still works on touch devices via active */
+  .gimg:active img{transform:scale(1.05)}
+
   .galg{grid-template-columns:1fr}
   .phero-txt h1{font-size:28px}
   .slide-text h1{font-size:26px}
@@ -368,7 +391,6 @@ footer{background:var(--navy);color:#fff;padding:52px 48px 0}
         <li><a onclick="go('activities')">Hiking</a></li>
         <li><a onclick="go('activities')">Bush dinner</a></li>
         <li><a onclick="go('activities')">Bird Watching</a></li>
-        
       </ul>
     </li>
     <li><span class="sep">|</span></li>
@@ -661,7 +683,6 @@ footer{background:var(--navy);color:#fff;padding:52px 48px 0}
         <div class="cdet"><div class="cicn">🕐</div><div><div class="clbl">Office Hours</div><div class="cval">Mon–Sun: 7:00 AM – 8:00 PM (CAT)</div></div></div>
       </div>
 
-      <!-- ── CONTACT FORM ── -->
       <div class="cform reveal">
         <h3>Send an Enquiry</h3>
         <form id="contactForm" onsubmit="submitForm(event)" novalidate>
@@ -701,8 +722,6 @@ footer{background:var(--navy);color:#fff;padding:52px 48px 0}
           <button type="submit" class="fsub">SEND ENQUIRY →</button>
         </form>
       </div>
-      <!-- ── END CONTACT FORM ── -->
-
     </div>
   </div>
 </div>
@@ -838,10 +857,8 @@ function submitForm(e){
   const ci=document.getElementById('ci').value;
   const co=document.getElementById('co').value;
   if(ci&&co&&new Date(co)<=new Date(ci)){showToast('Check-out must be after check-in.');return}
-  /* All good — show popup and reset form */
   document.getElementById('popup').classList.add('on');
   document.getElementById('contactForm').reset();
-  /* Restore default dates after reset */
   const t=new Date(),cid=new Date(t),cod=new Date(t);
   cid.setDate(t.getDate()+1);cod.setDate(t.getDate()+3);
   const f=d=>d.toISOString().split('T')[0];
@@ -853,11 +870,9 @@ function submitForm(e){
 function closePopup(){
   document.getElementById('popup').classList.remove('on');
 }
-/* Close popup on overlay click */
 document.getElementById('popup').addEventListener('click',function(e){
   if(e.target===this) closePopup();
 });
-/* Close popup on Escape key */
 document.addEventListener('keydown',function(e){
   if(e.key==='Escape') closePopup();
 });
