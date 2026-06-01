@@ -227,14 +227,14 @@ nav{background:var(--white);padding:0 32px;display:flex;align-items:center;justi
 
 footer{background:var(--navy);color:#fff;padding:40px 0 0}
 .fgrid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0;padding-bottom:0}
-.fcol{border:2px solid var(--red);padding:22px 18px 26px;margin:-1px}
-.fcol h3{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;color:#fff}
-.fcol p{font-size:11px;line-height:1.7;color:rgba(255,255,255,.72)}
-.fcol ul{list-style:none}
+.fcol{border:none;border-right:1px solid var(--red);padding:22px 18px 26px}.fcol:last-child{border-right:none}
+.fcol h3{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;color:#fff;padding-bottom:10px;margin-left:-18px;margin-right:-18px;padding-left:18px;padding-right:18px;border-bottom:1px solid var(--red)}
+.fcol p{font-size:11px;line-height:1.7;color:rgba(255,255,255,.72);margin-top:14px}
+.fcol ul{list-style:none;margin-top:14px}
 .fcol ul li{margin-bottom:7px}
 .fcol ul li a{color:rgba(255,255,255,.72);font-size:11px;transition:color .2s;cursor:pointer}
 .fcol ul li a:hover{color:var(--gold)}
-.fcol address{font-style:normal;font-size:11px;color:rgba(255,255,255,.72);line-height:1.9}
+.fcol address{font-style:normal;font-size:11px;color:rgba(255,255,255,.72);line-height:1.9;margin-top:14px;display:block}
 .fcol address a{color:rgba(255,255,255,.72)}
 .fcol address a:hover{color:var(--gold)}
 .fgal{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
@@ -355,7 +355,7 @@ footer{background:var(--navy);color:#fff;padding:40px 0 0}
   .lbprev,.lbnext{display:none}
   /* footer: 2x2 grid on smallest screens so all 4 cols stay visible */
   footer{padding:0}
-  .fgrid{grid-template-columns:1fr 1fr}
+  .fgrid{grid-template-columns:repeat(4,1fr)}
   .fcol{padding:16px 12px 18px}
   .fcol h3{font-size:11px;margin-bottom:10px}
   .fcol p,.fcol ul li a,.fcol address{font-size:10px}
